@@ -5,26 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio of Muhammad Nishmal P</title>
     <!-- React and ReactDOM from CDN -->
-    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" defer></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" defer></script>
     <!-- Babel for JSX compilation -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <!-- Animate.css for animations -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <!-- Font Awesome for 3D icons -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js" defer></script>
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
-    <!-- CSS for background patterns -->
+    <!-- Loading Spinner CSS -->
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
             margin: 0;
+            font-family: 'Press Start 2P', cursive;
+            background: #000;
+            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             overflow: hidden;
+        }
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            position: absolute;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         .portfolio-container {
             text-align: center;
@@ -36,6 +47,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
+            display: none; /* Hidden until loaded */
         }
         .badge, .tag {
             display: inline-block;
@@ -44,31 +56,17 @@
             border-radius: 5px;
             color: white;
             font-size: 14px;
-            animation: float 3s infinite;
         }
         .badge.custom-badge {
             background-color: #28a745;
         }
         .tag {
             background-color: #6c757d;
-            animation: pulse 2s infinite;
         }
         .icon {
             font-size: 40px;
             margin: 10px;
             animation: rotate 4s linear infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
         .hidden-feature {
             display: none;
@@ -112,10 +110,23 @@
             }
         }
     </style>
+    <!-- Loading spinner JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show loader until React is loaded
+            const loader = document.createElement('div');
+            loader.className = 'loader';
+            document.body.appendChild(loader);
+
+            window.addEventListener('load', function() {
+                loader.style.display = 'none';
+                document.querySelector('.portfolio-container').style.display = 'block';
+            });
+        });
+    </script>
 </head>
 <body>
     <div id="root"></div>
-
     <script type="text/babel">
         const { useState } = React;
 
