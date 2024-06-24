@@ -13,9 +13,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <!-- Font Awesome for 3D icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <!-- CSS for background patterns -->
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             margin: 0;
@@ -27,12 +28,14 @@
         }
         .portfolio-container {
             text-align: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
             border-radius: 15px;
             max-width: 90%;
             width: 600px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
         }
         .badge, .tag {
             display: inline-block;
@@ -67,12 +70,44 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .hidden-feature {
+            display: none;
+            font-size: 20px;
+            margin-top: 20px;
+            color: #f9ca24;
+        }
+        .icon:hover + .hidden-feature {
+            display: block;
+            animation: tada 1s;
+        }
+        .tech-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .tech-icon {
+            font-size: 50px;
+            margin: 10px;
+            color: #61dafb;
+            transition: transform 0.3s;
+        }
+        .tech-icon:hover {
+            transform: scale(1.2);
+            color: #e91e63;
+        }
+        @keyframes tada {
+            0% { transform: scale(1); }
+            10%, 20% { transform: scale(0.9) rotate(-3deg); }
+            30%, 50%, 70%, 90% { transform: scale(1.1) rotate(3deg); }
+            40%, 60%, 80% { transform: scale(1.1) rotate(-3deg); }
+            100% { transform: scale(1) rotate(0); }
+        }
         @media (max-width: 600px) {
             .badge, .tag {
                 padding: 8px 15px;
                 font-size: 12px;
             }
-            .icon {
+            .icon, .tech-icon {
                 font-size: 30px;
             }
         }
@@ -85,8 +120,8 @@
         const { useState } = React;
 
         function Portfolio() {
-            const [badges, setBadges] = useState(["React", "Node.js", "JavaScript"]);
-            const [tags, setTags] = useState(["MERN", "Frontend", "Backend"]);
+            const [badges, setBadges] = useState(["React", "Node.js", "JavaScript", "HTML5", "CSS3", "MongoDB", "Express", "GraphQL"]);
+            const [tags, setTags] = useState(["MERN", "Frontend", "Backend", "Full Stack", "Web Development"]);
 
             return (
                 <div className="portfolio-container animate__animated animate__fadeIn">
@@ -95,7 +130,7 @@
                     <div className="animate__animated animate__zoomIn">
                         <h2>Badges</h2>
                         {badges.map(badge => (
-                            <span key={badge} className={`badge custom-badge`}>{badge}</span>
+                            <span key={badge} className="badge custom-badge">{badge}</span>
                         ))}
                     </div>
                     <div className="animate__animated animate__lightSpeedInRight">
@@ -104,11 +139,18 @@
                             <span key={tag} className="tag">{tag}</span>
                         ))}
                     </div>
-                    <div className="animate__animated animate__rotateIn">
+                    <div className="animate__animated animate__rotateIn tech-icons">
                         <h2>3D Icons</h2>
-                        <i className="fas fa-laptop-code icon"></i>
-                        <i className="fas fa-database icon"></i>
-                        <i className="fas fa-code icon"></i>
+                        <i className="fab fa-react tech-icon"></i>
+                        <i className="fab fa-node tech-icon"></i>
+                        <i className="fas fa-database tech-icon"></i>
+                        <i className="fas fa-code tech-icon"></i>
+                    </div>
+                    <div>
+                        <i className="fas fa-magic icon"></i>
+                        <div className="hidden-feature animate__animated animate__tada">
+                            You found the magic feature!
+                        </div>
                     </div>
                 </div>
             );
