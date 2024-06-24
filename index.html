@@ -1,1 +1,78 @@
-nothing
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio of Muhammad Nishmal P</title>
+    <!-- React and ReactDOM from CDN -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <!-- Babel for JSX compilation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Animate.css for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .portfolio-container {
+            text-align: center;
+            padding: 50px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            color: white;
+            background-color: #007bff;
+            font-size: 14px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 2px;
+            border-radius: 3px;
+            background-color: #6c757d;
+            color: white;
+            font-size: 12px;
+        }
+        .custom-badge {
+            background-color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        function Portfolio() {
+            const [badges, setBadges] = useState(["React", "Node.js", "JavaScript"]);
+            const [tags, setTags] = useState(["MERN", "Frontend", "Backend"]);
+
+            return (
+                <div className="portfolio-container">
+                    <h1 className="animate__animated animate__fadeInDown">Muhammad Nishmal P</h1>
+                    <p className="animate__animated animate__fadeInUp">Vadakara, MERN Stack Developer</p>
+                    <div className="animate__animated animate__zoomIn">
+                        <h2>Badges</h2>
+                        {badges.map(badge => (
+                            <span key={badge} className={`badge custom-badge`}>{badge}</span>
+                        ))}
+                    </div>
+                    <div className="animate__animated animate__lightSpeedInRight">
+                        <h2>Tags</h2>
+                        {tags.map(tag => (
+                            <span key={tag} className="tag">{tag}</span>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<Portfolio />, document.getElementById('root'));
+    </script>
+</body>
+</html>
