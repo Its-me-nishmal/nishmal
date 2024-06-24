@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio of Muhammad Nishmal P</title>
     <!-- React and ReactDOM from CDN -->
-    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
     <!-- Babel for JSX compilation -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <!-- Animate.css for animations -->
@@ -27,51 +27,54 @@
         }
         .portfolio-container {
             text-align: center;
-            padding: 50px;
+            padding: 20px;
             background: rgba(0, 0, 0, 0.7);
             border-radius: 15px;
+            max-width: 90%;
+            width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .badge {
+        .badge, .tag {
             display: inline-block;
             padding: 10px 20px;
             margin: 5px;
             border-radius: 5px;
             color: white;
-            background-color: #007bff;
             font-size: 14px;
             animation: float 3s infinite;
         }
-        .tag {
-            display: inline-block;
-            padding: 5px 10px;
-            margin: 2px;
-            border-radius: 3px;
-            background-color: #6c757d;
-            color: white;
-            font-size: 12px;
-            animation: pulse 2s infinite;
-        }
-        .custom-badge {
+        .badge.custom-badge {
             background-color: #28a745;
         }
-        @keyframes float {
-            0% { transform: translatey(0px); }
-            50% { transform: translatey(-10px); }
-            100% { transform: translatey(0px); }
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        .tag {
+            background-color: #6c757d;
+            animation: pulse 2s infinite;
         }
         .icon {
-            font-size: 50px;
+            font-size: 40px;
             margin: 10px;
             animation: rotate 4s linear infinite;
         }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
         @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @media (max-width: 600px) {
+            .badge, .tag {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            .icon {
+                font-size: 30px;
+            }
         }
     </style>
 </head>
