@@ -4,19 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio of Muhammad Nishmal P</title>
-    <!-- React and ReactDOM from CDN -->
     <script src="https://unpkg.com/react@17/umd/react.production.min.js" defer></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" defer></script>
-    <!-- Babel for JSX compilation -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js" defer></script>
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
-    <!-- Loading Spinner CSS -->
     <style>
         body {
             margin: 0;
             font-family: 'Press Start 2P', cursive;
-            background: #000;
+            background: linear-gradient(135deg, #1c1c1c, #3c3c3c);
             color: #fff;
             display: flex;
             justify-content: center;
@@ -39,23 +35,31 @@
         }
         .portfolio-container {
             text-align: center;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 15px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
             max-width: 90%;
             width: 600px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
             position: relative;
-            overflow: hidden;
-            display: none; /* Hidden until loaded */
+            display: none;
+            transition: transform 0.5s;
+        }
+        h1, h2, p {
+            margin: 20px 0;
+            transition: transform 0.3s;
+        }
+        h1 {
+            color: #61dafb;
         }
         .badge, .tag {
             display: inline-block;
-            padding: 10px 20px;
-            margin: 5px;
-            border-radius: 5px;
+            padding: 12px 25px;
+            margin: 8px;
+            border-radius: 8px;
             color: white;
-            font-size: 14px;
+            font-size: 16px;
+            transition: transform 0.3s, background-color 0.3s;
         }
         .badge.custom-badge {
             background-color: #28a745;
@@ -63,57 +67,60 @@
         .tag {
             background-color: #6c757d;
         }
-        .icon {
-            font-size: 40px;
-            margin: 10px;
-            animation: rotate 4s linear infinite;
-        }
-        .hidden-feature {
-            display: none;
-            font-size: 20px;
-            margin-top: 20px;
-            color: #f9ca24;
-        }
-        .icon:hover + .hidden-feature {
-            display: block;
-            animation: tada 1s;
-        }
         .tech-icons {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
+            margin: 20px 0;
         }
         .tech-icon {
             font-size: 50px;
             margin: 10px;
             color: #61dafb;
-            transition: transform 0.3s;
+            transition: transform 0.5s, color 0.5s;
         }
         .tech-icon:hover {
-            transform: scale(1.2);
+            transform: scale(1.4) rotate(20deg);
             color: #e91e63;
+            animation: wobble 1s infinite;
         }
-        @keyframes tada {
-            0% { transform: scale(1); }
-            10%, 20% { transform: scale(0.9) rotate(-3deg); }
-            30%, 50%, 70%, 90% { transform: scale(1.1) rotate(3deg); }
-            40%, 60%, 80% { transform: scale(1.1) rotate(-3deg); }
-            100% { transform: scale(1) rotate(0); }
+        @keyframes wobble {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+        .hidden-easter-egg {
+            display: none;
+            font-size: 20px;
+            color: #f9ca24;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: opacity 0.3s;
+            white-space: nowrap;
+        }
+        .easter-egg:hover .hidden-easter-egg {
+            display: block;
+            opacity: 1;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         @media (max-width: 600px) {
             .badge, .tag {
                 padding: 8px 15px;
                 font-size: 12px;
             }
-            .icon, .tech-icon {
+            .tech-icon {
                 font-size: 30px;
             }
         }
     </style>
-    <!-- Loading spinner JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Show loader until React is loaded
             const loader = document.createElement('div');
             loader.className = 'loader';
             document.body.appendChild(loader);
@@ -131,37 +138,30 @@
         const { useState } = React;
 
         function Portfolio() {
-            const [badges, setBadges] = useState(["React", "Node.js", "JavaScript", "HTML5", "CSS3", "MongoDB", "Express", "GraphQL"]);
-            const [tags, setTags] = useState(["MERN", "Frontend", "Backend", "Full Stack", "Web Development"]);
+            const badges = ["React", "Node.js", "JavaScript", "HTML5", "CSS3", "MongoDB", "Express", "GraphQL"];
+            const tags = ["MERN", "Frontend", "Backend", "Full Stack", "Web Development"];
+            const easterEggs = Array.from({ length: 101 }, (_, i) => `Easter Egg ${i + 1}`);
 
             return (
-                <div className="portfolio-container animate__animated animate__fadeIn">
-                    <h1 className="animate__animated animate__fadeInDown">Muhammad Nishmal P</h1>
-                    <p className="animate__animated animate__fadeInUp">Vadakara, MERN Stack Developer</p>
-                    <div className="animate__animated animate__zoomIn">
-                        <h2>Badges</h2>
-                        {badges.map(badge => (
-                            <span key={badge} className="badge custom-badge">{badge}</span>
+                <div className="portfolio-container">
+                    <h1>Muhammad Nishmal P</h1>
+                    <p>Vadakara, MERN Stack Developer</p>
+                    <h2>Badges</h2>
+                    {badges.map(badge => (
+                        <span key={badge} className="badge custom-badge">{badge}</span>
+                    ))}
+                    <h2>Tags</h2>
+                    {tags.map(tag => (
+                        <span key={tag} className="tag">{tag}</span>
+                    ))}
+                    <h2>Tech Icons</h2>
+                    <div className="tech-icons">
+                        {badges.map((badge, index) => (
+                            <div key={index} className="easter-egg" style={{ position: 'relative' }}>
+                                <i className={`fab fa-${badge.toLowerCase()} tech-icon`}></i>
+                                <div className="hidden-easter-egg">{easterEggs[index % easterEggs.length]}</div>
+                            </div>
                         ))}
-                    </div>
-                    <div className="animate__animated animate__lightSpeedInRight">
-                        <h2>Tags</h2>
-                        {tags.map(tag => (
-                            <span key={tag} className="tag">{tag}</span>
-                        ))}
-                    </div>
-                    <div className="animate__animated animate__rotateIn tech-icons">
-                        <h2>3D Icons</h2>
-                        <i className="fab fa-react tech-icon"></i>
-                        <i className="fab fa-node tech-icon"></i>
-                        <i className="fas fa-database tech-icon"></i>
-                        <i className="fas fa-code tech-icon"></i>
-                    </div>
-                    <div>
-                        <i className="fas fa-magic icon"></i>
-                        <div className="hidden-feature animate__animated animate__tada">
-                            You found the magic feature!
-                        </div>
                     </div>
                 </div>
             );
